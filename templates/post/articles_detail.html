@@ -1,0 +1,41 @@
+{% extends "base.html" %} {% block content %}
+<div class="row">
+  <div class="col-12">
+    <a href="{% url "articles" %}" class="btn btn-primary">Retour</a>
+    <div>
+      <h1>#{{article.id}} - {{article.title}}</h1>
+      <p>{{article.content}}</p>
+    </div>
+  </div>
+  <div class="col-12">    
+    <form method="POST">
+      {% csrf_token %}
+      <div class="form-group">
+        <input
+          type="text"
+          placeholder="Commentaire :"
+          name="content"
+          class="form-control"
+        />
+      </div>
+      <input type="submit" value="Enregistrer" />
+    </form>
+    </div>
+</div>
+{% comment %} <div class="row">
+  <div class="col-12">
+    {% for item in article.comments %}
+    <div>
+      <h1>{{item.title}}</h1>
+      <p>{{item.content}}</p>
+      <a href="{% url 'delete_article' item.id %}" class="btn btn-danger"
+        >Supprimer</a
+      >
+      <a href="{% url 'detail_article' item.id %}" class="btn btn-primary"
+        >Detail</a
+      >
+    </div>
+    {% endfor %}
+  </div>
+</div> {% endcomment %}
+{% endblock %}
